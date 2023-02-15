@@ -28,16 +28,26 @@ let messageBuffer = new Array(10);
 
 client.on('messageCreate', async message => {
     if (message.author.bot) { return; }
+
+    if (config.DEBUG) {
+        console.log(message.content);
+    }
+
     if (message.content.startsWith(config.PREFIX)) {
         const args = message.content.slice(config.PREFIX.length).split(" ");
         const command = args.shift().toLowerCase();
-
         if (commands[command]) {
-            commands[command](message, args, messageBuffer);
+            if (config.DEBUG) {
+                console.log("Command: " + command);
+            }
+            if (!commands[command](message, args, messageBuffer)) {
+                message.reply("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
+            }
         }
 
+    } else {
+        messageBuffer.push(message.content);
+        messageBuffer.shift();
     }
-    messageBuffer.push(message.content);
-    messageBuffer.shift();
 
 });
