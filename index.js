@@ -6,9 +6,6 @@ const client = new Discord.Client(
     { intents: ["GUILD_MESSAGES", "GUILD_MEMBERS", "GUILDS"] }
 );
 
-// client.commands = new Discord.Collection();
-// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
 const commands = {};
 
 fs.readdirSync('./commands')
