@@ -1,6 +1,6 @@
 module.exports = {
     name: 'owo',
-    execute(message, args, buffer) {
+    execute({message, messageBuffer}) {
 
         const substitutions = { 
             'r': 'w', 
@@ -71,10 +71,10 @@ module.exports = {
             ""
         ];
 
-        if (typeof (buffer[buffer.length - 1]) == "undefined") {
+        if (typeof (messageBuffer[messageBuffer.length - 1]) == "undefined") {
             message.reply("Say something first!")
         } else {
-            const output = buffer[buffer.length - 1].replace(
+            const output = messageBuffer[messageBuffer.length - 1].replace(
                 new RegExp(Object.keys(substitutions).join('|'), 'g'), match => substitutions[match]
             ) + faces[Math.floor(Math.random() * faces.length)];
 

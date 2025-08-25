@@ -37,7 +37,9 @@ client.on('messageCreate', async message => {
             if (config.DEBUG) {
                 console.log("Command: " + command);
             }
-            if (!commands[command](message, args, messageBuffer)) {
+            //command is called here
+            const success = commands[command]({client, message, args, messageBuffer});
+            if (!success) {
                 message.reply("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
             }
         }

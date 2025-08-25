@@ -1,12 +1,12 @@
 module.exports = {
     name: 'cowsay',
-    execute(message, args, buffer) {
-        console.log(buffer[buffer.length - 1])
-        if (typeof (buffer[buffer.length - 1]) == "undefined") {
+    execute({message, messageBuffer}) {
+        console.log(messageBuffer[messageBuffer.length - 1])
+        if (typeof (messageBuffer[messageBuffer.length - 1]) == "undefined") {
             message.reply("Say something first!")
         } else {
             const cowMessage = '```' + bubbleMessage(
-                buffer[buffer.length - 1]) + asciimals[Math.floor(Math.random() * asciimals.length)] + '```';
+                messageBuffer[messageBuffer.length - 1]) + asciimals[Math.floor(Math.random() * asciimals.length)] + '```';
             message.reply(cowMessage);
         }
         return true;
